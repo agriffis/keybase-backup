@@ -1,0 +1,8 @@
+{:paths ["src" "test"]
+ :tasks {backup {:doc "Back up Keybase: bb backup [chat|files|git]... [--config P] [--target P] [--dry-run]"
+                 :requires ([kbb.main])
+                 :task (apply kbb.main/-main *command-line-args*)}
+         test {:doc "Run unit tests"
+               :requires ([clojure.test :as t] [kbb.config-test] [kbb.chat-test] [kbb.render-test])
+               :task (let [{:keys [fail error]} (t/run-tests 'kbb.config-test 'kbb.chat-test 'kbb.render-test)]
+                       (when (pos? (+ fail error)) (System/exit 1)))}}}

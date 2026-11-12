@@ -1,0 +1,5 @@
+.cpcache/
+/backup/
+/backup.log
+.clj-kondo/
+.lsp/
